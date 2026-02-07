@@ -70,11 +70,102 @@ from sklearn.metrics import (
 #     }
 # </style>
 #     """, unsafe_allow_html=True)
+# st.markdown("""
+# <style>
+#     /* ========================================
+#        #13293D THEME - PERFECT SIDEBAR TEXT FIX
+#        Navy Blue + Readable Text (Light/Dark)
+#     ======================================== */
+    
+#     /* Main Background */
+#     .stApp {
+#         background: linear-gradient(135deg, #E8F1F2 0%, #F0F9FF 100%);
+#     }
+    
+#     /* Sidebar Navy Blue (#13293D) */
+#     section[data-testid="stSidebar"] {
+#         background: linear-gradient(180deg, #13293D 0%, #1E3A8A 100%) !important;
+#     }
+    
+#     /* ========================================
+#        SIDEBAR TEXT FIX - WHITE TEXT VISIBLE
+#     ======================================== */
+#     /* Force ALL sidebar text white */
+#     [data-testid="stSidebar"] div,
+#     [data-testid="stSidebar"] label,
+#     [data-testid="stSidebar"] span,
+#     [data-testid="stSidebar"] p {
+#         color: #F8FAFC !important;
+#         font-weight: 500 !important;
+#     }
+    
+#     /* Dropdown container - White bg + Navy text */
+#     [data-testid="stSidebar"] div[data-baseweb="select"] {
+#         background-color: rgba(255,255,255,0.95) !important;
+#         border: 2px solid #60A5FA !important;
+#         border-radius: 10px !important;
+#     }
+    
+#     [data-testid="stSidebar"] div[data-baseweb="select"] div {
+#         color: #13293D !important;
+#         font-weight: 600 !important;
+#     }
+    
+#     /* Dropdown arrow */
+#     [data-testid="stSidebar"] svg {
+#         fill: #13293D !important;
+#     }
+    
+#     /* Button - Shiny Navy */
+#     .stButton > button {
+#         background: linear-gradient(135deg, #13293D 0%, #1E40AF 50%, #3B82F6 100%) !important;
+#         color: white !important;
+#         border: none !important;
+#         border-radius: 12px !important;
+#         height: 3.5em !important;
+#         font-size: 16px !important;
+#         font-weight: 700 !important;
+#         box-shadow: 0 8px 25px rgba(19,41,61,0.4) !important;
+#     }
+    
+#     .stButton > button:hover {
+#         background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%) !important;
+#         transform: translateY(-3px) !important;
+#         box-shadow: 0 12px 35px rgba(59,130,246,0.5) !important;
+#     }
+    
+#     /* Metric Cards - Glass effect */
+#     [data-testid="metric-container"] {
+#         background: rgba(255,255,255,0.9) !important;
+#         backdrop-filter: blur(10px);
+#         border: 1px solid rgba(99,102,241,0.2) !important;
+#         border-radius: 20px !important;
+#         box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+#     }
+    
+#     /* Title */
+#     h1 {
+#         background: linear-gradient(135deg, #13293D, #3B82F6);
+#         -webkit-background-clip: text;
+#         -webkit-text-fill-color: transparent;
+#         font-weight: 800 !important;
+#         text-shadow: none !important;
+#     }
+    
+#     /* File uploader */
+#     [data-testid="stFileUploader"] {
+#         border: 2px dashed #60A5FA !important;
+#         border-radius: 16px !important;
+#         background: rgba(96,165,250,0.05) !important;
+#     }
+# </style>
+# """, unsafe_allow_html=True)
+
+
 st.markdown("""
 <style>
     /* ========================================
-       #13293D THEME - PERFECT SIDEBAR TEXT FIX
-       Navy Blue + Readable Text (Light/Dark)
+       #13293D THEME - METRICS VISIBLE + PERFECT
     ======================================== */
     
     /* Main Background */
@@ -82,65 +173,67 @@ st.markdown("""
         background: linear-gradient(135deg, #E8F1F2 0%, #F0F9FF 100%);
     }
     
-    /* Sidebar Navy Blue (#13293D) */
+    /* Sidebar Navy Blue */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #13293D 0%, #1E3A8A 100%) !important;
     }
     
-    /* ========================================
-       SIDEBAR TEXT FIX - WHITE TEXT VISIBLE
-    ======================================== */
-    /* Force ALL sidebar text white */
-    [data-testid="stSidebar"] div,
+    /* SIDEBAR TEXT - WHITE & VISIBLE */
+    [data-testid="stSidebar"] *,
     [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] span,
-    [data-testid="stSidebar"] p {
+    [data-testid="stSidebar"] span {
         color: #F8FAFC !important;
         font-weight: 500 !important;
     }
     
-    /* Dropdown container - White bg + Navy text */
+    /* DROPDOWN - White bg + Navy text */
     [data-testid="stSidebar"] div[data-baseweb="select"] {
         background-color: rgba(255,255,255,0.95) !important;
         border: 2px solid #60A5FA !important;
         border-radius: 10px !important;
     }
     
-    [data-testid="stSidebar"] div[data-baseweb="select"] div {
+    [data-testid="stSidebar"] div[data-baseweb="select"] span {
         color: #13293D !important;
+    }
+    
+    /* 🎯 METRIC FIX - WHITE TEXT VISIBLE */
+    [data-testid="metric-container"] {
+        background: rgba(255,255,255,0.95) !important;
+        border-radius: 16px !important;
+        border: 2px solid #E2E8F0 !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    /* METRIC LABELS - BLACK TEXT (VISIBLE!) */
+    [data-testid="metric-container"] .stMetricLabel {
+        color: #1F2937 !important;
         font-weight: 600 !important;
+        font-size: 14px !important;
     }
     
-    /* Dropdown arrow */
-    [data-testid="stSidebar"] svg {
-        fill: #13293D !important;
+    /* METRIC VALUES - NAVY BLUE (VISIBLE!) */
+    [data-testid="metric-container"] .stMetricValue {
+        color: #13293D !important;
+        font-size: 28px !important;
+        font-weight: 800 !important;
     }
     
-    /* Button - Shiny Navy */
+    /* BUTTON - Shiny Navy */
     .stButton > button {
-        background: linear-gradient(135deg, #13293D 0%, #1E40AF 50%, #3B82F6 100%) !important;
+        background: linear-gradient(135deg, #13293D 0%, #1E40AF 100%) !important;
         color: white !important;
         border: none !important;
         border-radius: 12px !important;
         height: 3.5em !important;
-        font-size: 16px !important;
         font-weight: 700 !important;
         box-shadow: 0 8px 25px rgba(19,41,61,0.4) !important;
     }
     
     .stButton > button:hover {
         background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%) !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 12px 35px rgba(59,130,246,0.5) !important;
-    }
-    
-    /* Metric Cards - Glass effect */
-    [data-testid="metric-container"] {
-        background: rgba(255,255,255,0.9) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(99,102,241,0.2) !important;
-        border-radius: 20px !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 12px 35px rgba(59,130,246,0.6) !important;
+        transform: translateY(-2px) !important;
     }
     
     /* Title */
@@ -149,14 +242,13 @@ st.markdown("""
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800 !important;
-        text-shadow: none !important;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
         border: 2px dashed #60A5FA !important;
         border-radius: 16px !important;
-        background: rgba(96,165,250,0.05) !important;
+        background: rgba(96,165,250,0.08) !important;
     }
 </style>
 """, unsafe_allow_html=True)
