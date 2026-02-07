@@ -73,101 +73,93 @@ from sklearn.metrics import (
 st.markdown("""
 <style>
     /* ========================================
-       THEME-AWARE CUSTOMIZATION (#13293D Navy Blue)
-       Works PERFECTLY in Light + Dark mode!
+       #13293D THEME - PERFECT SIDEBAR TEXT FIX
+       Navy Blue + Readable Text (Light/Dark)
     ======================================== */
     
-    /* Main App Background - Light/Dark aware */
+    /* Main Background */
     .stApp {
-        background: linear-gradient(135deg, #E8F1F2 0%, #F8FAFC 100%);
+        background: linear-gradient(135deg, #E8F1F2 0%, #F0F9FF 100%);
     }
     
-    /* Sidebar - Navy Blue (#13293D) */
+    /* Sidebar Navy Blue (#13293D) */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #13293D 0%, #1E3A5F 100%);
+        background: linear-gradient(180deg, #13293D 0%, #1E3A8A 100%) !important;
     }
     
     /* ========================================
-       LIGHT THEME (Default)
+       SIDEBAR TEXT FIX - WHITE TEXT VISIBLE
     ======================================== */
-    /* Light theme sidebar text */
-    [data-testid="stSidebar"] section[data-testid="stSidebar"] > div > div > div {
-        color: white !important;
+    /* Force ALL sidebar text white */
+    [data-testid="stSidebar"] div,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] p {
+        color: #F8FAFC !important;
+        font-weight: 500 !important;
     }
     
-    /* Light theme dropdown fix */
-    [data-testid="stSidebar"] div[role="combobox"] {
-        background-color: white;
+    /* Dropdown container - White bg + Navy text */
+    [data-testid="stSidebar"] div[data-baseweb="select"] {
+        background-color: rgba(255,255,255,0.95) !important;
+        border: 2px solid #60A5FA !important;
+        border-radius: 10px !important;
+    }
+    
+    [data-testid="stSidebar"] div[data-baseweb="select"] div {
         color: #13293D !important;
-        border: 2px solid #13293D;
-        border-radius: 8px;
+        font-weight: 600 !important;
     }
     
-    [data-testid="stSidebar"] div[role="combobox"]::placeholder {
-        color: #64748B;
+    /* Dropdown arrow */
+    [data-testid="stSidebar"] svg {
+        fill: #13293D !important;
     }
     
-    /* ========================================
-       DARK THEME (Auto-detects)
-    ======================================== */
-    /* Dark theme sidebar text stays white */
-    [data-testid="theme-root"] [data-testid="theme-dark"] [data-testid="stSidebar"] * {
-        color: white !important;
-        background-color: transparent !important;
-    }
-    
-    /* Dark theme dropdown (white bg, navy text) */
-    [data-testid="theme-root"] [data-testid="theme-dark"] [data-testid="stSidebar"] div[role="combobox"] {
-        background-color: #1E293B !important;
-        color: white !important;
-        border: 2px solid #60A5FA;
-    }
-    
-    /* Button - Navy Blue (#13293D) - Both themes */
+    /* Button - Shiny Navy */
     .stButton > button {
-        background: linear-gradient(135deg, #13293D 0%, #1E40AF 100%) !important;
+        background: linear-gradient(135deg, #13293D 0%, #1E40AF 50%, #3B82F6 100%) !important;
         color: white !important;
         border: none !important;
         border-radius: 12px !important;
-        height: 3.2em !important;
-        font-weight: 600 !important;
+        height: 3.5em !important;
         font-size: 16px !important;
-        box-shadow: 0 4px 12px rgba(19, 41, 61, 0.3) !important;
-        transition: all 0.3s ease !important;
+        font-weight: 700 !important;
+        box-shadow: 0 8px 25px rgba(19,41,61,0.4) !important;
     }
     
-    /* Button Hover (Gold accent) */
     .stButton > button:hover {
-        background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%) !important;
-        box-shadow: 0 6px 20px rgba(19, 41, 61, 0.5) !important;
-        transform: translateY(-2px) !important;
+        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 12px 35px rgba(59,130,246,0.5) !important;
     }
     
-    /* Metric Cards */
+    /* Metric Cards - Glass effect */
     [data-testid="metric-container"] {
-        background: linear-gradient(135deg, white 0%, #F8FAFC 100%);
-        border-radius: 16px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        background: rgba(255,255,255,0.9) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(99,102,241,0.2) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
     }
     
-    /* Dark theme metrics */
-    [data-testid="theme-root"] [data-testid="theme-dark"] [data-testid="metric-container"] {
-        background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
-        border: 1px solid #475569;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    
-    /* Title styling */
+    /* Title */
     h1 {
-        color: #13293D !important;
-        font-family: 'Segoe UI', -apple-system, sans-serif !important;
-        text-shadow: 0 2px 4px rgba(19,41,61,0.1);
+        background: linear-gradient(135deg, #13293D, #3B82F6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800 !important;
+        text-shadow: none !important;
+    }
+    
+    /* File uploader */
+    [data-testid="stFileUploader"] {
+        border: 2px dashed #60A5FA !important;
+        border-radius: 16px !important;
+        background: rgba(96,165,250,0.05) !important;
     }
 </style>
 """, unsafe_allow_html=True)
-
-
 
 # ---------------------------------------------------------
 # 2. GLOBAL CONSTANTS
