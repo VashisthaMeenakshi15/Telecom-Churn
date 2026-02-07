@@ -45,7 +45,7 @@ st.markdown("""
     
     /* Sidebar Text Color */
     [data-testid="stSidebar"] * {
-        color: white !important;
+        color: black !important;
     }
 
     /* Button Styling */
