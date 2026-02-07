@@ -21,12 +21,12 @@ st.set_page_config(
 )
 
 # ========================================
-# SINGLE PERFECT CSS - ALL FIXES INCLUDED
+# PERFECT CSS - DARK MODE TEXT FIXED + FULL PAGE
 # ========================================
 st.markdown("""
 <style>
     /* ========================================
-       #13293D PERFECT THEME - FULL PAGE + DARK MODE WHITE
+       #13293D PERFECT THEME - DARK MODE TEXT PERFECTLY FIXED
     ======================================== */
     
     /* FULL PAGE - NO MARGINS, MAX WIDTH */
@@ -37,7 +37,7 @@ st.markdown("""
         padding: 0.5rem !important;
     }
     
-    /* REMOVE ALL PADDING - FULL WIDTH */
+    /* REMOVE ALL CENTER ALIGNMENT - FULL WIDTH */
     .main > div {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
@@ -78,7 +78,7 @@ st.markdown("""
         font-weight: 600 !important;
     }
     
-    /* 🎯 METRICS - Perfect Light + Dark */
+    /* 🎯 METRICS - Light Mode (White cards, Navy text) */
     [data-testid="metric-container"] {
         background: rgba(255,255,255,0.95) !important;
         border-radius: 16px !important;
@@ -100,11 +100,40 @@ st.markdown("""
         font-weight: 800 !important;
     }
     
-    /* DARK MODE - WHITE TEXT EVERYWHERE */
-    [data-testid="theme-root"][data-testid="theme-dark"] * {
-        color: #F8FAFC !important;
+    /* 🎯 DARK MODE FIX - ALL TEXT BLACK + PERFECT VISIBILITY */
+    [data-testid="theme-root"][data-testid="theme-dark"],
+    [data-testid="theme-root"].dark-theme {
+        color: #1F2937 !important;
     }
     
+    /* DARK MODE - FORCE ALL TEXT BLACK */
+    [data-testid="theme-root"][data-testid="theme-dark"] *,
+    [data-testid="theme-root"].dark-theme * {
+        color: #1F2937 !important;
+    }
+    
+    /* DARK MODE - Headers, Subheaders, Paragraphs */
+    [data-testid="theme-root"][data-testid="theme-dark"] h1,
+    [data-testid="theme-root"][data-testid="theme-dark"] h2,
+    [data-testid="theme-root"][data-testid="theme-dark"] h3,
+    [data-testid="theme-root"][data-testid="theme-dark"] p,
+    [data-testid="theme-root"][data-testid="theme-dark"] div,
+    [data-testid="theme-root"][data-testid="theme-dark"] span,
+    [data-testid="theme-root"][data-testid="theme-dark"] .stMarkdown {
+        color: #1F2937 !important;
+    }
+    
+    /* DARK MODE - INFO/SUCCESS/WARNING/ERROR BOXES */
+    [data-testid="theme-root"][data-testid="theme-dark"] div[role="alert"],
+    [data-testid="theme-root"][data-testid="theme-dark"] .stAlert,
+    [data-testid="theme-root"][data-testid="theme-dark"] div.element-container {
+        background: rgba(248, 250, 252, 0.98) !important;
+        color: #1F2937 !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+    }
+    
+    /* DARK MODE - METRICS (White text on dark cards) */
     [data-testid="theme-root"][data-testid="theme-dark"] [data-testid="metric-container"] {
         background: rgba(30, 41, 59, 0.95) !important;
         border: 2px solid #475569 !important;
@@ -134,7 +163,7 @@ st.markdown("""
         transform: translateY(-2px) !important;
     }
     
-    /* TITLE */
+    /* TITLE - Gradient */
     h1 {
         background: linear-gradient(135deg, #13293D, #3B82F6);
         -webkit-background-clip: text;
