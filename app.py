@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import (
     accuracy_score, roc_auc_score, precision_score, 
-    recall_score, f1_score, matthews_corrcoef, confusion_matrixf
+    recall_score, f1_score, matthews_corrcoef, confusion_matrix
 )
 
 # ---------------------------------------------------------
