@@ -7,25 +7,61 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import (
     accuracy_score, roc_auc_score, precision_score, 
-    recall_score, f1_score, matthews_corrcoef, confusion_matrix
+    recall_score, f1_score, matthews_corrcoef, confusion_matrixf
 )
 
 # ---------------------------------------------------------
 # 1. CONFIGURATION
 # ---------------------------------------------------------
+# st.set_page_config(page_title="Telco Churn AI", layout="wide", page_icon="📡")
+
+# st.markdown("""
+#     <style>
+#     .main { background-color: #F8F9FA; font-family: 'Segoe UI', sans-serif; }
+#     .stButton>button { 
+#         width: 100%; border-radius: 6px; height: 3em; 
+#         background-color: #007BFF; color: white; font-weight: 600; 
+#     }
+#     .stButton>button:hover { background-color: #0056b3; }
+#     </style>
+#     """, unsafe_allow_html=True)
+# ---------------------------------------------------------
+# 1. CONFIGURATION
+# ---------------------------------------------------------
 st.set_page_config(page_title="Telco Churn AI", layout="wide", page_icon="📡")
 
+# CHANGE BACKGROUND COLOR HERE
 st.markdown("""
     <style>
-    .main { background-color: #F8F9FA; font-family: 'Segoe UI', sans-serif; }
+    /* Main Background (The main content area) */
+    .stApp {
+        background-color: #E8F1F2; /* Light Blue-Grey */
+    }
+
+    /* Sidebar Background */
+    [data-testid="stSidebar"] {
+        background-color: #13293D; /* Dark Navy */
+    }
+    
+    /* Sidebar Text Color */
+    [data-testid="stSidebar"] * {
+        color: white !important;
+    }
+
+    /* Button Styling */
     .stButton>button { 
         width: 100%; border-radius: 6px; height: 3em; 
         background-color: #007BFF; color: white; font-weight: 600; 
+        border: none;
     }
     .stButton>button:hover { background-color: #0056b3; }
+    
+    /* Headings and Text */
+    h1, h2, h3 {
+        color: #13293D; /* Match heading color to sidebar */
+    }
     </style>
     """, unsafe_allow_html=True)
-
 # ---------------------------------------------------------
 # 2. GLOBAL CONSTANTS
 # ---------------------------------------------------------
@@ -109,7 +145,7 @@ if app_mode == "Batch Prediction Tool":
     st.markdown("Upload a CSV of customers to identify who is at risk of leaving.")
     st.markdown("---")
 
-    left_col, right_col = st.columns([1, 2])
+    left_col, right_col = st.columns([2, 4])
 
     with left_col:
         st.subheader("1. Upload Data")
