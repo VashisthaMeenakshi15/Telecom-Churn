@@ -28,48 +28,146 @@ from sklearn.metrics import (
 # ---------------------------------------------------------
 # 1. CONFIGURATION
 # ---------------------------------------------------------
-st.set_page_config(page_title="Telco Churn AI", layout="wide", page_icon="📡")
+# st.set_page_config(page_title="Telco Churn AI", layout="wide", page_icon="📡")
 
-# CHANGE BACKGROUND COLOR HERE
+# # CHANGE BACKGROUND COLOR HERE
+# st.markdown("""
+# <style>
+#     /* Main Background */
+#     .stApp {
+#         background-color: #E8F1F2;
+#     }
+ 
+#     /* Sidebar Background */
+#     [data-testid="stSidebar"] {
+#         background-color: #13293D;
+#     }
+ 
+#     /* TEXT COLOR FIX: Forces all sidebar text to be white with NO background */
+#     [data-testid="stSidebar"] * {
+#         color: white !important;
+#         background-color: transparent !important; /* Removes the pink block */
+#     }
+ 
+#     /* DROPDOWN FIX: Reset the input box to be white with black text */
+#     /* This targets the specific box where "Logistic Regression" is written */
+#     [data-testid="stSidebar"] div[data-baseweb="select"] > div,
+#     [data-testid="stSidebar"] div[data-baseweb="select"] span {
+#         color: black !important;
+#         background-color: white !important;
+#     }
+ 
+#     /* Dropdown Arrow Icon */
+#     [data-testid="stSidebar"] svg {
+#         fill: black !important;
+#     }
+ 
+#     /* Button Styling */
+#     .stButton>button { 
+#         width: 100%; border-radius: 6px; height: 3em; 
+#         background-color: #000000; color: white; font-weight: 600; 
+#         border: none;
+#     }
+# </style>
+#     """, unsafe_allow_html=True)
 st.markdown("""
 <style>
-    /* Main Background */
+    /* ========================================
+       THEME-AWARE CUSTOMIZATION (#13293D Navy Blue)
+       Works PERFECTLY in Light + Dark mode!
+    ======================================== */
+    
+    /* Main App Background - Light/Dark aware */
     .stApp {
-        background-color: #E8F1F2;
+        background: linear-gradient(135deg, #E8F1F2 0%, #F8FAFC 100%);
     }
- 
-    /* Sidebar Background */
-    [data-testid="stSidebar"] {
-        background-color: #13293D;
+    
+    /* Sidebar - Navy Blue (#13293D) */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #13293D 0%, #1E3A5F 100%);
     }
- 
-    /* TEXT COLOR FIX: Forces all sidebar text to be white with NO background */
-    [data-testid="stSidebar"] * {
+    
+    /* ========================================
+       LIGHT THEME (Default)
+    ======================================== */
+    /* Light theme sidebar text */
+    [data-testid="stSidebar"] section[data-testid="stSidebar"] > div > div > div {
         color: white !important;
-        background-color: transparent !important; /* Removes the pink block */
     }
- 
-    /* DROPDOWN FIX: Reset the input box to be white with black text */
-    /* This targets the specific box where "Logistic Regression" is written */
-    [data-testid="stSidebar"] div[data-baseweb="select"] > div,
-    [data-testid="stSidebar"] div[data-baseweb="select"] span {
-        color: black !important;
-        background-color: white !important;
+    
+    /* Light theme dropdown fix */
+    [data-testid="stSidebar"] div[role="combobox"] {
+        background-color: white;
+        color: #13293D !important;
+        border: 2px solid #13293D;
+        border-radius: 8px;
     }
- 
-    /* Dropdown Arrow Icon */
-    [data-testid="stSidebar"] svg {
-        fill: black !important;
+    
+    [data-testid="stSidebar"] div[role="combobox"]::placeholder {
+        color: #64748B;
     }
- 
-    /* Button Styling */
-    .stButton>button { 
-        width: 100%; border-radius: 6px; height: 3em; 
-        background-color: #000000; color: white; font-weight: 600; 
-        border: none;
+    
+    /* ========================================
+       DARK THEME (Auto-detects)
+    ======================================== */
+    /* Dark theme sidebar text stays white */
+    [data-testid="theme-root"] [data-testid="theme-dark"] [data-testid="stSidebar"] * {
+        color: white !important;
+        background-color: transparent !important;
+    }
+    
+    /* Dark theme dropdown (white bg, navy text) */
+    [data-testid="theme-root"] [data-testid="theme-dark"] [data-testid="stSidebar"] div[role="combobox"] {
+        background-color: #1E293B !important;
+        color: white !important;
+        border: 2px solid #60A5FA;
+    }
+    
+    /* Button - Navy Blue (#13293D) - Both themes */
+    .stButton > button {
+        background: linear-gradient(135deg, #13293D 0%, #1E40AF 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        height: 3.2em !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        box-shadow: 0 4px 12px rgba(19, 41, 61, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* Button Hover (Gold accent) */
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%) !important;
+        box-shadow: 0 6px 20px rgba(19, 41, 61, 0.5) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Metric Cards */
+    [data-testid="metric-container"] {
+        background: linear-gradient(135deg, white 0%, #F8FAFC 100%);
+        border-radius: 16px;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    /* Dark theme metrics */
+    [data-testid="theme-root"] [data-testid="theme-dark"] [data-testid="metric-container"] {
+        background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+        border: 1px solid #475569;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    
+    /* Title styling */
+    h1 {
+        color: #13293D !important;
+        font-family: 'Segoe UI', -apple-system, sans-serif !important;
+        text-shadow: 0 2px 4px rgba(19,41,61,0.1);
     }
 </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
+
+
 
 # ---------------------------------------------------------
 # 2. GLOBAL CONSTANTS
