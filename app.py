@@ -40,7 +40,7 @@ st.markdown("""
 
     /* Sidebar Background */
     [data-testid="stSidebar"] {
-        background-color: #13293D; /* Dark Navy */
+        background-color: #13293D; /* Navy */
     }
     
     /* Sidebar Text Color */
