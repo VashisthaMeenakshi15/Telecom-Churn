@@ -32,36 +32,45 @@ st.set_page_config(page_title="Telco Churn AI", layout="wide", page_icon="📡")
 
 # CHANGE BACKGROUND COLOR HERE
 st.markdown("""
-    <style>
-    /* Main Background (The main content area) */
+<style>
+    /* Main Background */
     .stApp {
-        background-color: #E8F1F2; /* Light Blue-Grey */
+        background-color: #E8F1F2;
     }
-
+ 
     /* Sidebar Background */
     [data-testid="stSidebar"] {
-        background-color: #13293D; /* Light Blue-Grey */
+        background-color: #13293D;
     }
-    
-    /* Sidebar Text Color */
-   [data-testid="stSidebar"] div[data-baseweb="select"] > div {
+ 
+    /* TEXT COLOR FIX: Forces all sidebar text to be white with NO background */
+    [data-testid="stSidebar"] * {
+        color: white !important;
+        background-color: transparent !important; /* Removes the pink block */
+    }
+ 
+    /* DROPDOWN FIX: Reset the input box to be white with black text */
+    /* This targets the specific box where "Logistic Regression" is written */
+    [data-testid="stSidebar"] div[data-baseweb="select"] > div,
+    [data-testid="stSidebar"] div[data-baseweb="select"] span {
         color: black !important;
-        }
-
+        background-color: white !important;
+    }
+ 
+    /* Dropdown Arrow Icon */
+    [data-testid="stSidebar"] svg {
+        fill: black !important;
+    }
+ 
     /* Button Styling */
     .stButton>button { 
         width: 100%; border-radius: 6px; height: 3em; 
-        background-color: #000000; color: black; font-weight: 600; 
+        background-color: #000000; color: white; font-weight: 600; 
         border: none;
     }
-    .stButton>button:hover { background-color: #0056b3; }
-    
-    /* Headings and Text */
-    h1, h2, h3 {
-        color: #13293D; /* Match heading color to sidebar */
-    }
-    </style>
+</style>
     """, unsafe_allow_html=True)
+
 # ---------------------------------------------------------
 # 2. GLOBAL CONSTANTS
 # ---------------------------------------------------------
