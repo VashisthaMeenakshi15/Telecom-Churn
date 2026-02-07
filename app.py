@@ -44,9 +44,9 @@ st.markdown("""
     }
     
     /* Sidebar Text Color */
-    [data-testid="stSidebar"] * {
+   [data-testid="stSidebar"] div[data-baseweb="select"] > div {
         color: black !important;
-    }
+        }
 
     /* Button Styling */
     .stButton>button { 
