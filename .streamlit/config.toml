@@ -1,0 +1,6 @@
+[theme]
+base = "light"
+primaryColor = "#007BFF"  # This matches your Blue buttons
+backgroundColor = "#F0F2F6" # This matches your Light Grey background
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#31333F"
