@@ -297,26 +297,25 @@ if app_mode == "Batch Prediction Tool":
             if st.button("📥 Download", 
                          help="Download test_data_combined.csv from GitHub",
                          use_container_width=True):
-                pass  # Button styling handled by CSS
-        
+                pass  # Button styling handled by CSS     
         try:
             df_sample = load_sample_data_from_github()
-                if df_sample is not None:
-                    csv_sample = df_sample.to_csv(index=False).encode('utf-8')
+            if df_sample is not None:
+                csv_sample = df_sample.to_csv(index=False).encode('utf-8')
                     
-                    st.download_button(
-                        label=f"📥 test_data_combined.csv ({len(df_sample):,} rows)",
-                        data=csv_sample,
-                        file_name="test_data_combined.csv",
-                        mime="text/csv",
-                        use_container_width=True,
-                        type="secondary"
+                st.download_button(
+                    label=f"📥 test_data_combined.csv ({len(df_sample):,} rows)",
+                    data=csv_sample,
+                    file_name="test_data_combined.csv",
+                    mime="text/csv",
+                    use_container_width=True,
+                    type="secondary"
                     )
                     st.caption("*Powered by your GitHub repo*")
-                else:
-                    st.error("❌ Cannot fetch from GitHub")
-                    st.markdown("[🔗 View on GitHub](https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv)")
-            except:
+            else:
+                st.error("❌ Cannot fetch from GitHub")
+                st.markdown("[🔗 View on GitHub](https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv)")
+        except:
                 st.error("❌ Network error")
                 st.markdown("[🔗 GitHub Link](https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv)")
 
