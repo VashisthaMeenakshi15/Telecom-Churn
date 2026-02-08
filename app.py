@@ -211,6 +211,15 @@ def load_assets():
         st.error("⚠️ 'preprocessor.pkl' not found. Please run the training notebook first.")
         return None
 
+@st.cache_data
+def load_sample_data_from_github():
+    """Load test_data_combined.csv from GitHub"""
+    GITHUB_RAW_URL = "https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv"
+    try:
+        return pd.read_csv(GITHUB_RAW_URL)
+    except:
+        return None
+        
 def get_trained_model(selection):
     model_map = {
         "Logistic Regression": "log_reg.pkl",
@@ -277,9 +286,42 @@ if app_mode == "Batch Prediction Tool":
     with left_col:
         st.subheader("1. 📤 Upload Data")
         st.info("📋 CSV must contain standard Telco columns (Churn optional)")
-        
-        data_file = st.file_uploader("Drop CSV Here", type=["csv"])
 
+        #Download Sample Data from GitHub
+        # 🎯 STYLISH DOWNLOAD SECTION - Perfect placement + colors
+        st.markdown("---")
+        col_sample1, col_sample2 = st.columns([3, 1])
+        with col_sample1:
+            st.markdown("**💾 Test with sample data**")
+        with col_sample2:
+            if st.button("📥 Download", 
+                         help="Download test_data_combined.csv from GitHub",
+                         use_container_width=True):
+                pass  # Button styling handled by CSS
+        
+        try:
+            df_sample = load_sample_data_from_github()
+                if df_sample is not None:
+                    csv_sample = df_sample.to_csv(index=False).encode('utf-8')
+                    
+                    st.download_button(
+                        label=f"📥 test_data_combined.csv ({len(df_sample):,} rows)",
+                        data=csv_sample,
+                        file_name="test_data_combined.csv",
+                        mime="text/csv",
+                        use_container_width=True,
+                        type="secondary"
+                    )
+                    st.caption("*Powered by your GitHub repo*")
+                else:
+                    st.error("❌ Cannot fetch from GitHub")
+                    st.markdown("[🔗 View on GitHub](https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv)")
+            except:
+                st.error("❌ Network error")
+                st.markdown("[🔗 GitHub Link](https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv)")
+
+        data_file = st.file_uploader("Drop CSV Here", type=["csv"])
+------------------------------------------------------------------------------
         if data_file:
             try:
                 raw_df = pd.read_csv(data_file)
