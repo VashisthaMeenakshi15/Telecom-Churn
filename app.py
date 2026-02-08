@@ -311,7 +311,7 @@ if app_mode == "Batch Prediction Tool":
                     use_container_width=True,
                     type="secondary"
                     )
-                    st.caption("*Powered by your GitHub repo*")
+                st.caption("*Powered by your GitHub repo*")
             else:
                 st.error("❌ Cannot fetch from GitHub")
                 st.markdown("[🔗 View on GitHub](https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv)")
