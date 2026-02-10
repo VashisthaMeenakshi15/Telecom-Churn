@@ -214,7 +214,7 @@ def load_assets():
 @st.cache_data
 def load_sample_data_from_github():
     """Load test_data_combined.csv from GitHub"""
-    GITHUB_RAW_URL = "https://github.com/VashisthaMeenakshi15/Telecom-Churn/blob/main/test_data_combined.csv"
+    GITHUB_RAW_URL = "https://raw.githubusercontent.com/VashisthaMeenakshi15/Telecom-Churn/main/test_data_combined.csv"
     try:
         return pd.read_csv(GITHUB_RAW_URL)
     except:
