@@ -423,13 +423,39 @@ if app_mode == "Batch Prediction Tool":
 # ---------------------------------------------------------
 else:
     st.title("📊 Model Benchmark & Insights")
+    
     CSV_PATH = 'model_performance.csv'
     if os.path.exists(CSV_PATH):
         df_results = pd.read_csv(CSV_PATH)
+        
+        # 1. Prepare Metrics Table (Sorted)
+        df_display = df_results.sort_values(by="F1-Score", ascending=False).reset_index(drop=True)
+        
+        st.subheader("1. 🏆 Performance Metrics")
         st.dataframe(
-            df_results.sort_values(by="F1-Score", ascending=False), 
+            df_display, 
             use_container_width=True,
-            height=400
+            hide_index=True,               # <--- FIX: Hides the 0,1,2 index column
+            height=(len(df_display) + 1) * 35 + 3  # <--- FIX: Removes extra empty white rows
         )
+        
+        # 2. Add Key Insights Table
+        st.subheader("2. 🧠 Model Observations")
+        
+        # Defining insights based on your screenshot metrics
+        insights_data = [
+            {"Algorithm": "Logistic Regression", "Observation": "🏆 Best Performer: Highest Accuracy (82%) and AUC (0.86). Excellent baseline."},
+            {"Algorithm": "Gaussian NB",         "Observation": "⚠️ High Sensitivity: Top Recall (89%) captures most churners, but high False Alarms (Low Precision)."},
+            {"Algorithm": "XGBoost",             "Observation": "⚖️ Balanced: Strong trade-off between Precision and Recall. Robust for complex data."},
+            {"Algorithm": "Random Forest",       "Observation": "🌲 Stable: Performance is very close to XGBoost. Good handling of non-linear features."},
+            {"Algorithm": "K-Nearest Neighbors", "Observation": "📍 Moderate: Decent accuracy (77%), but struggled to distinguish boundary cases."},
+            {"Algorithm": "Decision Tree",       "Observation": "📉 Overfitting: Lowest AUC (0.64) and Accuracy. The model is likely too complex (needs pruning)."}
+        ]
+        
+        df_insights = pd.DataFrame(insights_data)
+        
+        # Display as a static table (cleaner for text)
+        st.table(df_insights)
+
     else:
-        st.warning("⚠️ 'model_performance.csv' not found. Run training notebook.")
+        st.warning("⚠️ 'model_performance.csv' not found. Please run the training notebook to generate this file.")
